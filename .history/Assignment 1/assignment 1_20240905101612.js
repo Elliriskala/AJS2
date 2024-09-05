@@ -90,20 +90,15 @@ const listRestaurants = async (restaurants) => {
       }
     });
   } catch (error) {
+    const errorTarget = document.createElement('div');
+    errorTarget.classList.add('error');
+    const errorMessage = document.createElement('h2').textContent = 'Error fetching restaurant data';
+    errorTarget.append(errorMessage)
+    body.append(errorTarget)
+
     console.error(error);
   }
 };
 
-try {
-  restaurants = await fetchRestaurants();
-  listRestaurants(restaurants);
-} catch (error) {
-  const errorTarget = document.createElement('div');
-  errorTarget.classList.add('error');
-  const errorMessage = document.createElement('h2').textContent = 'Error fetching restaurant data';
-  errorTarget.append(errorMessage)
-  body.append(errorTarget)
-
-  console.error(error);
-}
-
+restaurants = await fetchRestaurants();
+listRestaurants(restaurants);

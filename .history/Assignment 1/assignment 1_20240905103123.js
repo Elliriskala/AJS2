@@ -1,13 +1,13 @@
 /* 1. In this assignment, your objective is to finalize the restaurant app by incorporating modular components, arrow functions, special operators, and applying destructuring where appropriate. You'll be enhancing the existing codebase to create a more organized, maintainable, and efficient application. */
 
-import { fetchData } from './utils.js';
-import { restaurantModal } from './components.js';
-import { restaurantRow } from './components.js';
-import { apiURL } from './variables.js';
+import {fetchData} from './utils.js';
+import {restaurantModal} from './components.js';
+import {restaurantRow} from './components.js';
+import {apiURL} from './variables.js';
 
-'use strict';
+('use strict');
 
-const body = document.querySelector('body')
+const body = document.querySelector('body');
 const target = document.querySelector('tbody');
 const modal = document.querySelector('dialog');
 const info = document.querySelector('#info');
@@ -53,7 +53,7 @@ const listRestaurants = async (restaurants) => {
 
     restaurants.sort((a, b) => a.name.localeCompare(b.name));
 
-    restaurants.forEach(restaurant => {
+    restaurants.forEach((restaurant) => {
       if (restaurant) {
         const {_id} = restaurant;
         const row = restaurantRow(restaurant);
@@ -76,14 +76,17 @@ const listRestaurants = async (restaurants) => {
 
             console.log('Todays menu', menu.courses);
 
-            const restaurantHTML = restaurantModal(
-              restaurant,
-              menu
-            );
+            const restaurantHTML = restaurantModal(restaurant, menu);
             info.innerHTML = '';
             info.insertAdjacentHTML('beforeend', restaurantHTML);
           } catch (error) {
             console.error(error);
+            const errorTarget = document.createElement('div');
+            errorTarget.classList.add('error');
+            const errorMessage = (document.createElement('h2').textContent =
+              'Error fetching restaurant data');
+            errorTarget.append(errorMessage);
+            body.append(errorTarget);
           }
         });
         target.append(row);
@@ -94,16 +97,5 @@ const listRestaurants = async (restaurants) => {
   }
 };
 
-try {
-  restaurants = await fetchRestaurants();
-  listRestaurants(restaurants);
-} catch (error) {
-  const errorTarget = document.createElement('div');
-  errorTarget.classList.add('error');
-  const errorMessage = document.createElement('h2').textContent = 'Error fetching restaurant data';
-  errorTarget.append(errorMessage)
-  body.append(errorTarget)
-
-  console.error(error);
-}
-
+restaurants = await fetchRestaurants();
+listRestaurants(restaurants);
