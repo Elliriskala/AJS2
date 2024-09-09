@@ -5,13 +5,8 @@ body {
   padding: 0;
 }
 
-h1 {
-  margin: auto;
-  padding: 1rem;
-}
-
 button {
-  background-color: #dfe0c9;
+  background-color: #cfbdbd;
   border: 1px solid #ccc;
   border-radius: 0.3rem;
   cursor: pointer;

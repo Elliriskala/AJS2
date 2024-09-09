@@ -27,23 +27,9 @@ const fetchRestaurants = async () => {
   return await fetchData(apiURL + '/api/v1/restaurants');
 };
 
-resetButton.addEventListener('click', async () => {
-  restaurants = await fetchRestaurants();
+resetButton.addEventListener('click', () => {
+  restaurants = [];
   listRestaurants(restaurants);
-});
-
-sodexoButton.addEventListener('click', () => {
-  const filteredRestaurants = restaurants.filter(
-    ({company}) => company === 'Sodexo'
-  );
-  listRestaurants(filteredRestaurants);
-});
-
-compassButton.addEventListener('click', () => {
-  const filteredRestaurants = restaurants.filter(
-    ({company}) => company === 'Compass Group'
-  );
-  listRestaurants(filteredRestaurants);
 });
 
 const listRestaurants = async (restaurants) => {
@@ -51,6 +37,20 @@ const listRestaurants = async (restaurants) => {
     console.log(restaurants);
 
     target.innerHTML = '';
+
+    sodexoButton.addEventListener('click', () => {
+      const filteredRestaurants = restaurants.filter(
+        ({company}) => company === 'Sodexo'
+      );
+      listRestaurants(filteredRestaurants);
+    });
+
+    compassButton.addEventListener('click', () => {
+      const filteredRestaurants = restaurants.filter(
+        ({company}) => company === 'Compass Group'
+      );
+      listRestaurants(filteredRestaurants);
+    });
 
     restaurants.sort((a, b) => a.name.localeCompare(b.name));
 

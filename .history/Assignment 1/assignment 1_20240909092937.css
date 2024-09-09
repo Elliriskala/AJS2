@@ -6,8 +6,8 @@ body {
 }
 
 h1 {
-  margin: auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0.5em 1em;
 }
 
 button {
